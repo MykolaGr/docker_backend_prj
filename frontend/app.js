@@ -1,6 +1,6 @@
 // Base URLs
-const USER_SERVICE_URL = "http://127.0.0.1:5000/users";
-const NOTE_SERVICE_URL = "http://127.0.0.1:5001/notes";
+const USER_SERVICE_URL = "http://user_service:5000/users";
+const NOTE_SERVICE_URL = "http://notes_service:5001/notes";
 
 // Register
 const registerBtn = document.getElementById("registerBtn");

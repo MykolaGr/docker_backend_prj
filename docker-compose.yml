@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
+    ports:
+      - "8080:80"
+    depends_on:
+      - notes_service
+      - user_service
+
+  notes_service:
+    build: ./notes_service
+    container_name: notes_container
+    ports:
+      - "5001:5001"
+    volumes:
+      - notes_db:/app
+  user_service:
+    build: ./user_service
+    container_name: user_container
+    ports:
+      - "5000:5000"
+    volumes:
+      - user_db:/app
+volumes:
+  notes_db:
+  user_db:
+
