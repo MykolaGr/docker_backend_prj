@@ -1,0 +1,42 @@
+name: Backend Python Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies for user_service
+      run: |
+        if [ -f user_service/requirements.txt ]; then
+          pip install -r user_service/requirements.txt
+        else
+          echo "No requirements.txt found in user_service/"
+        fi
+
+    - name: Install dependencies for notes_service
+      run: |
+        if [ -f notes_service/requirements.txt ]; then
+          pip install -r notes_service/requirements.txt
+        else
+          echo "No requirements.txt found in notes_service/"
+        fi
+
+    - name: Run syntax check
+      run: |
+        python -m py_compile $(find . -name "*.py")
